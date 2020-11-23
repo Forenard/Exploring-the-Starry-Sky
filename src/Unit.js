@@ -1,78 +1,32 @@
-/**
- * Groval一覧
- * width 横
- * height 縦
- * canvas Canvas
- * ctx Context2d
- * Grid [[]]
- */
-
-//Groval変数の宣言
-let width;
-let height;
-let canvas;
-let ctx;
-let grid;
-
-//cellのstatus
-const none=-1;
-const way = 0;
-const wall = 1;
-const start = 2;
-const goal = 3;
-
-//debug用
-let statusType=["way","wall","start","goal"];
-
-//cellのfillTime
-const fillTime=100;
-//cellのサイズ
-const cellSize=10;
-//gridの縦横サイズ
-let rowCells=height/cellSize;
-let lineCells=width/cellSize;
-
-//どのbuttonが押されているかの判断
-let nowPushing=none;
-//buttonの要素を取得
-let button=document.getElementsByName("button");
-
-//現在のマウスがcanvas中かどうか
-let isMouseIn=false;
-//現在はクリック中か(canvas中)
-let isClickDown=false;
-
 //マウス系の関数を登録
 function onDown(e) {
-    console.log("down");
-    isClickDown=true;
+
+    isClickDown = true;
 }
 
 function onUp(e) {
-    console.log("up");
-    isClickDown=false;
+
+    isClickDown = false;
 }
-//いろいろここでやっちゃ～お
+
 function onClick(e) {
-    console.log("click");
-    var x = e.clientX - canvas.offsetLeft;
-    var y = e.clientY - canvas.offsetTop;
-    if(nowPushing!==none){
-        debug("x:"+x);
-        debug("y:"+y);
-    }
-    //
+
 }
 
 function onOver(e) {
-    console.log("mouseover");
-    isMouseIn=true;
+
+    isMouseIn = true;
 }
 
 function onOut() {
-    console.log("mouseout");
-    isMouseIn=false;
-    isClickDown=false;
+
+    isMouseIn = false;
+    isClickDown = false;
+}
+//動いてるときに検出
+function getMousePoint(e) {
+    mouseX = e.clientX - canvas.offsetLeft;
+    mouseY = e.clientY - canvas.offsetTop;
 }
 
 //Onloadで初めに呼ばれる。
@@ -92,19 +46,53 @@ function init() {
     canvas.addEventListener('click', onClick, false);
     canvas.addEventListener('mouseover', onOver, false);
     canvas.addEventListener('mouseout', onOut, false);
-
+    canvas.addEventListener('mousemove', getMousePoint, false);
+    //gridの縦横サイズ
     width = canvas.width;
     height = canvas.height;
+    rowCells = Math.floor(height / cellSize);
+    lineCells = Math.floor(width / cellSize);
+
+
     //gridの宣言と初期化
-    grid = [[]];
+    grid = new Array(rowCells);
     for (let i = 0; i < rowCells; i++) {
-        let gridline=[]
+        grid[i] = new Array(lineCells);
         for (let j = 0; j < lineCells; j++) {
-            gridline.push(new Cell(way,fillTime));
+            grid[i][j] = new Cell(way, 0, false);
         }
-        grid.push(gridline);
     }
 }
 
 
+
+//便利なfunctionたち
+
+/**
+ * dataをコンソールに表示
+ * @param {any} data 
+ */
+function debug(data) {
+    console.log(data);
+}
+
+
+//classたち
+/**
+ * statusで色を変更したいね
+ * filltimeを一回ずつ減らすelapseTime()
+ * isActiveのCellのみ大きくしていく
+ */
+class Cell {
+    constructor(status, fill, active) {
+        this.status = status;
+        this.fillTime = fill;
+        this.isActive = active;
+    }
+    elapseTime() {
+        if (this.fillTime < fillTime) {
+            this.fillTime++;
+        }
+    }
+}
 
