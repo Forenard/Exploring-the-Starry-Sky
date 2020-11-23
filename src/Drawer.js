@@ -10,7 +10,7 @@ function editGrid(status) {
     //編集済みかどうか
     if (grid[indexY][indexX].isActive) {
         //wayの場合に消す
-        if(status===way){
+        if (status === way) {
             grid[indexY][indexX].status = status;
             grid[indexY][indexX].fillTime = 0;
             grid[indexY][indexX].isActive = false;
@@ -24,7 +24,7 @@ function editGrid(status) {
         grid[indexY][indexX].isActive = true;
     }
 }
-
+//色の四角形書くよ
 function drawRect(y, x, size, color) {
     ctx.fillStyle = color;
 
@@ -37,19 +37,29 @@ function drawRect(y, x, size, color) {
 function drawGrid() {
     for (let i = 0; i < rowCells; i++) {
         for (let j = 0; j < lineCells; j++) {
+            //セルの初期化
+            let y = i * cellSize;
+            let x = j * cellSize;
+            let d=cellSize*(1-cellSizePersent)/2;
+            drawRect(y, x, cellSize, borderDefaultColor);
+            drawRect(y+d, x+d, cellSize * cellSizePersent, cellDefaultColor);
             if (grid[i][j].isActive) {
+
                 //四角形を書くよ(canvas座標に変換)
-                let y = i * cellSize;
-                let x = j * cellSize;
-                let size = (grid[i][j].fillTime / fillTime) * cellSize;
+
+                let size = (grid[i][j].fillTime / fillTime) * cellSize * cellSizePersent;
                 let color = cellColor[grid[i][j].status];
-                drawRect(y, x, size, color);
+
+
+                drawRect(y+d, x+d, size, color);
+                //時間を経過させる
             }
         }
     }
 }
 
-function solver() {
+
+function Editsolver() {
     //canvasの初期化
     ctx.clearRect(0, 0, width, height);
     //現在の押されているボタンの取得
@@ -67,9 +77,8 @@ function solver() {
     if (isClickDown && nowPushing !== none) {
         editGrid(nowPushing);
     }
-
     //描画
     drawGrid();
 }
 
-setInterval(solver, 100);
+setInterval(Editsolver, 30);

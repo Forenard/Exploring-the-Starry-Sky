@@ -14,6 +14,11 @@ const goal = 4;
 
 //cellのcolor
 const cellColor = ["white","pink", "black", "darkblue", "darkred"];
+//cellのデフォルトカラーと枠線
+const cellDefaultColor="Ivory";
+const borderDefaultColor="darkgreen";
+//cellの倍率
+const cellSizePersent=0.95;
 
 //debug用
 var statusType = ["none","way", "wall", "start", "goal"];
