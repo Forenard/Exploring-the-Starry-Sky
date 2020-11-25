@@ -10,4 +10,5 @@
 
 ## Where is the page?
 
-- ここ!
+- ここ!☟
+- https://forenard.github.io/GameForBrowser/src/index.html
