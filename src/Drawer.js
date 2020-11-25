@@ -6,7 +6,14 @@ function editGrid(status) {
     //gridのindexへ変換
     let indexX = Math.floor(mouseX / cellSize);
     let indexY = Math.floor(mouseY / cellSize);
-    debug(indexX);
+    
+    //error検知
+    if(0<=indexX && indexX<lineCells && 0<=indexY && indexY<rowCells){
+        //正常
+    }else{
+        debug("グリッドの範囲外アクセス");
+    }
+
     //編集済みかどうか
     if (grid[indexY][indexX].isActive) {
         //wayの場合に消す
@@ -22,6 +29,8 @@ function editGrid(status) {
         grid[indexY][indexX].status = status;
         grid[indexY][indexX].fillTime = fillTime;
         grid[indexY][indexX].isActive = true;
+
+        return;
     }
 }
 //色の四角形書くよ
@@ -44,35 +53,26 @@ function drawGrid() {
             drawRect(y, x, cellSize, borderDefaultColor);
             drawRect(y+d, x+d, cellSize * cellSizePersent, cellDefaultColor);
             if (grid[i][j].isActive) {
-
+                //時間を経過させる
+                grid[i][j].elapseTime();
                 //四角形を書くよ(canvas座標に変換)
 
                 let size = (grid[i][j].fillTime / fillTime) * cellSize * cellSizePersent;
                 let color = cellColor[grid[i][j].status];
-
+                d=(cellSize-size)/2;
 
                 drawRect(y+d, x+d, size, color);
-                //時間を経過させる
+                
             }
         }
     }
 }
 
-
-function Editsolver() {
+//編集用
+function EditSolver() {
     //canvasの初期化
     ctx.clearRect(0, 0, width, height);
-    //現在の押されているボタンの取得
-    button[0].onclick = () => {
-        debug("none");
-        nowPushing = none;
-    }
-    for (let i = 1; i < button.length; i++) {
-        button[i].onclick = () => {
-            debug(statusType[i]);
-            nowPushing = i;
-        }
-    }
+    
     //現在クリックダウン中で、座標からいろいろ変更する
     if (isClickDown && nowPushing !== none) {
         editGrid(nowPushing);
@@ -81,4 +81,66 @@ function Editsolver() {
     drawGrid();
 }
 
-setInterval(Editsolver, 30);
+//アルゴ用
+function AlgoSolver() {
+    //ゆっくり進める
+    if(nowTime%algoSpan===0){
+        //生きてるセルの検出
+        let que=[];
+        //Goalの検出
+        let goalQue=[];
+        for(let i=0;i<rowCells;i++){
+            for(let j=0;j<lineCells;j++){
+                if(grid[i][j].isActive && (grid[i][j].status===way || grid[i][j].status===start || grid[i][j].status===goaled)){
+                    que.push([i,j]);
+                }
+                if(grid[i][j].isActive && grid[i][j].status===goal){
+                    goalQue.push([i,j]);
+                }
+            }
+        }
+        //goal、若しくは誕生するセルが無かったら終わり
+        if(goalQue.length===0||que.length===0){
+            debug("Done");
+            nowEdit = true;
+            nowPushing=none;
+            nowTime=0;
+            //Todo:startButtonの画像の切り替え
+
+            return;
+        }
+        while (que.length!==0) {
+            let p=que[que.length-1];
+            que.pop();
+            for(let i = 0; i < 4; i++) {
+                let ny = p[0] + dy[i], nx = p[1] + dx[i];
+                if(nx < 0 || ny < 0 || nx >= lineCells || ny >= rowCells) continue;
+                if(grid[ny][nx].status===wall) continue;
+                if(grid[ny][nx].status===goal){
+                    grid[ny][nx].status=goaled;
+                    continue;
+                }
+                if(grid[ny][nx].isActive)continue;
+                grid[ny][nx].isActive=true;
+            }
+        }
+        debug("AlgoDraw");
+        drawGrid();
+    }
+    nowTime++;
+}
+
+//ソルバを分ける
+function Solver() {
+    if(nowEdit){
+        //画像差し替え
+        startButton.setAttribute('src', '../images/play.png');
+        EditSolver();
+    }else{
+        //画像差し替え
+        startButton.setAttribute('src', '../images/stop.png');
+        AlgoSolver();
+    }
+}
+
+setInterval(Solver, 15);

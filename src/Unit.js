@@ -25,8 +25,8 @@ function onOut() {
 }
 //動いてるときに検出
 function getMousePoint(e) {
-    mouseX = e.clientX - canvas.offsetLeft;
-    mouseY = e.clientY - canvas.offsetTop;
+    mouseX = e.clientX - canvas.getBoundingClientRect().left;
+    mouseY = e.clientY - canvas.getBoundingClientRect().top;
 }
 
 //Onloadで初めに呼ばれる。
@@ -61,6 +61,26 @@ function init() {
         for (let j = 0; j < lineCells; j++) {
             grid[i][j] = new Cell(way, 0, false);
         }
+    }
+
+    //現在の押されているボタンの取得
+    button[0].onclick = () => {
+        debug("none");
+        nowPushing = none;
+    }
+    for (let i = 1; i < button.length; i++) {
+        button[i].onclick = () => {
+            debug(statusType[i]);
+            nowPushing = i;
+        }
+    }
+    //モードの切り替え
+    startButton.onclick = () => {
+        debug("Swith");
+        nowEdit = !nowEdit;
+        nowPushing=none;
+        nowTime=0;
+        //Todo:startButtonの画像の切り替え
     }
 }
 

@@ -1,17 +1,22 @@
 #canvas {
-    position: absolute;
-    top:400px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin:auto;
+    padding: 0;
+    margin: auto;
+    display: block;
+    border: none;
 }
-h1{
+
+h1 {
     text-align: center;
 }
-#buttons{
+
+button {
+    cursor: pointer;
+}
+
+#buttons {
     text-align: center;
 }
+
 .status {
     padding: 5px 20px;
     background-color: #337ab7;
@@ -19,6 +24,7 @@ h1{
     width: 100px;
     height: auto;
 }
+
 .clear {
     padding: 5px 20px;
     background-color: tomato;
@@ -26,19 +32,16 @@ h1{
     width: 100px;
     height: auto;
 }
-body{
-    background-color: sandybrown;
-}
-#player{
+
+#player {
     text-align: center;
     padding-bottom: 20px;
     padding-top: 20px;
 }
-#play{
+
+#playDisplay {
+    display: inline-block;
+    cursor: pointer;
+    /* カーソル形状 */
     width: 100px;
-}
-#playDisplay{
-    background-color: sandybrown;
-    
-    border-style: none;
 }

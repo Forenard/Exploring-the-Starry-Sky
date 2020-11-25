@@ -8,12 +8,14 @@
     <title>Two-Dimensional Grid Solver</title>
 </head>
 
-<body onload="init();">
+<body onload="init();" background="../images/Ocean_2.jpg">
     <h1>Two-Dimensional Grid Solver</h1>
     <div id="player">
+        <!--
         <button name="algoStart" id="playDisplay">
-            <img src="../images/play.png" alt="play" id="play">
-        </button>
+            <img src="../images/play.png"  alt="play" id="play">
+        </button>-->
+        <img src="../images/play.png" alt="play" name="algoStart" id="playDisplay" >
     </div>
     <div id="buttons">
         <button name="button" class="clear">選択解除</button>
@@ -23,8 +25,11 @@
         <button name="button" class="status">ゴール</button>
     </div>
     <br>
+    <hr>
     <!--Canvas 横800 x 縦800-->
     <canvas id="canvas" width="600" height="400"></canvas>
+    
+    
     <script src="Define.js"></script>
     <script src="Unit.js"></script>
     <script src="Drawer.js"></script>
