@@ -6,5 +6,8 @@
 
 # 実装
 - えー、クリックダウン時にぬりぬりできるようにする
-- 全てにおいてそうする？->とりあえず全部のstatusでやるcar
+- 全てにおいてそうする？->とりあえず全部のstatusでやる
 - way以外は最初からfilled
+
+## ぺれれ～
+- [Webページ](https://forenard.github.io/GameForBrowser/)
