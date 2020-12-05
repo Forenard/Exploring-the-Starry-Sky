@@ -15,7 +15,7 @@ const goaled=5;
 const path=6;
 
 //cellのcolor
-const cellColor = ["white","white", "slategray", "gold", "hotpink","red","aquamarine"];
+const cellColor = ["white","deepskyblue", "slategray", "gold", "hotpink","red","lightpink"];
 //cellのデフォルトカラーと枠線
 const cellDefaultColor="midnightblue";
 const borderDefaultColor="skyblue";
@@ -28,7 +28,7 @@ var statusType = ["none","way", "wall", "start", "goal","goaled"];
 //cellのfillTime
 const fillTime = 5;
 //cellのサイズ
-const cellSize = 10;
+var cellSize = 10;
 //gridの縦横サイズ
 var rowCells;
 var lineCells;
@@ -41,6 +41,8 @@ var pathFound=false;
 var button = document.getElementsByName("button");
 var startButton = document.getElementById("playDisplay");
 var distance=document.getElementById("distance");
+var sizeUp=document.getElementById("up");
+var sizeDown=document.getElementById("down");
 //現在のマウスがcanvas中かどうか
 var isMouseIn = false;
 //現在はクリック中か(canvas中)

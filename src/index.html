@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/earlyaccess/nicomoji.css" rel="stylesheet">
-    <title>Two-Dimensional Grid Solver</title>
+    <title>ほしぞらたんけん</title>
 </head>
 
 <body onload="init();" background="../images/Night.gif">
+
     <a href="#" class="wf-nicomoji">
         <h1>ほしぞらたんけん</h1>
     </a>
@@ -27,24 +28,36 @@
         <button name="button" class="status">スタート</button>
         <button name="button" class="status">ゴール</button>
     </div>
+    <div id="size">
+        <button id="up" class="sizes">マスをおおきく</button>
+        <button id="down" class="sizes">マスをちいさく</button>
+    </div>
     <br>
     <hr>
     <h2 class="wf-nicomoji" id="distance">きょり：なし</h2>
+
     <!--Canvas 横800 x 縦800-->
-    <canvas id="canvas" width="600" height="400"></canvas>
+    <canvas id="canvas" width="500" height="500"></canvas>
     <div id="howto">
         <label>
             <span>あそびかた</span>
             <input type="checkbox" name="checkbox">
             <div id="popup">
-                <img src="../images/Night.gif" alt="night"/>
+                <div id="ex">
+                    <h2>マスのサイズをかえよう！☟</h2>
+                    <h2>ツールをせんたく！☟</h2>
+                    <h2>マスをぬろう！☟</h2>
+                    <h2>▶を、おそう！☟</h2>
+                    <h2>さいたんけいろがわかる！☟</h2>
+                    <h2>うれしい！</h2>
+                </div>
             </div>
         </label>
     </div>
     <script src="Define.js"></script>
     <script src="Unit.js"></script>
     <script src="Drawer.js"></script>
-
+    <script src="Star.js"></script>
 </body>
 
 </html>

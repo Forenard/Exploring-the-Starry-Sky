@@ -34,24 +34,34 @@ function init() {
 
     //現在の押されているボタンの取得
     button[0].onclick = () => {
-        debug("none");
+        
         nowPushing = none;
         //gridの初期化
         gridInit();
     }
     for (let i = 1; i < button.length; i++) {
         button[i].onclick = () => {
-            debug(statusType[i]);
+            
             nowPushing = i;
         }
     }
     //モードの切り替え
     startButton.onclick = () => {
-        debug("Swith");
+        
         nowEdit = !nowEdit;
         nowPushing=none;
         nowTime=0;
         //Todo:startButtonの画像の切り替え
+    }
+
+    //sizeの切り替え
+    sizeUp.onclick = () => {
+        cellSize=Math.min(50,cellSize+10);
+        gridInit();
+    }
+    sizeDown.onclick = () => {
+        cellSize=Math.max(10,cellSize-10);
+        gridInit();
     }
 }
 

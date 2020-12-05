@@ -1,15 +1,37 @@
+.star {
+    animation: fall 8s linear;
+    /*color: yellow;*/
+    display: inline-block;
+    height: 1em;
+    line-height: 1em;
+    position: fixed;
+    top: -1em;
+    z-index: -1;
+}
+
+@keyframes fall {
+    0% {
+        transform:translateY(0) rotateY(0);
+    }
+    100% {
+        transform:translateY(calc(200vh + 2em)) translateX(calc(200vh + 2em));
+    }
+}
 #canvas {
     padding: 0;
     margin: auto;
     display: block;
     border: none;
     margin-top: 5%;
-    margin-bottom: 10%;
+    margin-bottom: 5%;
+}
+h1{
+    color: skyblue;
 }
 .wf-nicomoji { 
     font-family: "Nico Moji"; 
     text-align: center;
-    color: silver;
+    color: slateblue;
     font-size: 250%;
     text-decoration: none;
 }
@@ -25,7 +47,35 @@ button {
 #buttons {
     text-align: center;
 }
-
+#size{
+    margin-top: 10px;
+    text-align: center;
+}
+.sizes{
+    padding: 5px 20px;
+    background-color: #337ab7;
+    border-style: none;
+    width: 150px;
+    height: auto;
+    font-size: 18px;
+    display: inline-block;
+    padding: 0.5em 1em 0.3em;
+    color: black;
+    border: solid 3px steelblue;
+    border-radius: 10px;
+    background: linear-gradient(
+      -45deg,
+      #ddeeff 25%,
+      #c6e6fb 25%,
+      #c6e6fb 50%,
+      #ddeeff 50%,
+      #ddeeff 75%,
+      #c6e6fb 75%,
+      #c6e6fb
+    );
+    background-size: 10px 10px;
+    cursor: pointer;
+}
 .status {
     padding: 5px 20px;
     background-color: #337ab7;
@@ -36,8 +86,8 @@ button {
     display: inline-block;
     padding: 0.5em 1em 0.3em;
     color: #0099ff;
-    border: none;
-    border-radius: 5px;
+    border: solid 3px steelblue;
+    border-radius: 10px;
     background: linear-gradient(
       -45deg,
       #ddeeff 25%,
@@ -56,14 +106,14 @@ button {
     padding: 5px 20px;
     background-color: tomato;
     border-style: none;
-    width: 100px;
+    width: 120px;
     height: auto;
     font-size: 18px;
     display: inline-block;
     padding: 0.5em 1em 0.3em;
     color: tomato;
-    border: none;
-    border-radius: 5px;
+    border: solid 3px steelblue;
+    border-radius: 10px;
     background: linear-gradient(
       -45deg,
       #ddeeff 25%,
@@ -98,9 +148,15 @@ hr{
     background: none;
 }
 
+#ex{
+   margin: auto;
+   line-height:30px;
+}
+
 #popup{
-    width:30%;
-    line-height:none;
+    width:50%;
+    height: 90%;
+    line-height:50px;
     background:none;
     display:none;
     position:fixed;
@@ -108,25 +164,28 @@ hr{
     left:50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    border: none;
+    border: solid 6px lightpink;
+    border-radius: 10px;
     padding: none;
     margin: none;
+    background-color:mintcream;
+    font-family: "Nico Moji";
   }
   img{
-    width:100%;
+    width:50%;
   }
   label{
     padding: 5px 20px;
     background-color: black;
     border-style: none;
-    width: 100px;
-    height: auto;
+    width: 200px;
+    height: 50px;
     font-size: 18px;
     display: inline-block;
     padding: 0.5em 1em 0.3em;
     color: black;
-    border: none;
-    border-radius: 5px;
+    border: solid 3px steelblue;
+    border-radius: 10px;
     background: linear-gradient(
       -45deg,
       #ddeeff 25%,
@@ -145,6 +204,7 @@ hr{
   label span{
     font-family: "Nico Moji";
     text-align: center;
+    font-size: 200%;
   }
   label span:hover{
     cursor:pointer;
@@ -159,3 +219,19 @@ hr{
   #howto{
     text-align: center;
   }
+
+  h2 {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border: solid 3px steelblue;
+    border-radius: 10px;
+    color: #010079;
+    text-shadow: 0 0 5px white;
+    padding: 0.3em 0.5em;
+    background: -webkit-repeating-linear-gradient(-45deg, #cce7ff, #cce7ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+    background: repeating-linear-gradient(-45deg, #cce7ff, #cce7ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+  }
+
+  

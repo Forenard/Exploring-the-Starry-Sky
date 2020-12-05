@@ -123,7 +123,6 @@ function algoSolver() {
                 }
                 if(grid[i][j].isActive && grid[i][j].status===goaled){
                     goaledQue.push([i,j]);
-                    debug(grid[i][j].pathDistance);
                 }
                 if(grid[i][j].isActive && grid[i][j].status===start){
                     grid[i][j].pathDistance=0;
@@ -134,12 +133,15 @@ function algoSolver() {
         if(goalQue.length===0||que.length===0||activeCellNum==que.length){
             //displayDistance
             {
-                let hoge=0;
+                let hoge=[];
                 displayDistance=0;
                 for (let i = 0; i < goaledQue.length; i++) {
                     let ny=goaledQue[i][0],nx=goaledQue[i][1];
-                    hoge=grid[ny][nx].pathDistance;
-                    displayDistance=Math.max(displayDistance,hoge);
+                    hoge.push(grid[ny][nx].pathDistance);
+                }
+                if(hoge.length!==0){
+                    hoge.sort((a,b)=>{return a-b;});
+                    displayDistance=hoge[0];
                 }
             }
             //初回経路検出
@@ -167,7 +169,7 @@ function algoSolver() {
                 grid[ny][nx].pathDistance=grid[p[0]][p[1]].pathDistance+1;
             }
         }
-        debug("AlgoDraw");
+        
         drawGrid();
     }
     nowTime++;
@@ -183,10 +185,10 @@ function pathFinder(){
         pathFound=false;
         //きょりを表示
         if(displayDistance===0){
-            debug('きょり：なし');
+            
             distance.innerText='きょり：なし';
         }else{
-            debug(displayDistance);
+            
             distance.innerText='きょり：'+displayDistance;
         }
         displayDistance=0;
