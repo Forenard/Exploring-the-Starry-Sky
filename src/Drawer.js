@@ -102,10 +102,17 @@ function editSolver() {
 function algoSolver() {
     //ゆっくり進める
     if(nowTime%algoSpan===0){
+        //pathFind中かどうか
+        if(pathFound){
+            pathFinder();
+            return;
+        }
         //生きてるセルの検出
         let que=[];
         //Goalの検出
         let goalQue=[];
+        //Goaledの検出
+        goaledQue=[];
         for(let i=0;i<rowCells;i++){
             for(let j=0;j<lineCells;j++){
                 if(grid[i][j].isActive && (grid[i][j].status===way || grid[i][j].status===start || grid[i][j].status===goaled)){
@@ -114,14 +121,30 @@ function algoSolver() {
                 if(grid[i][j].isActive && grid[i][j].status===goal){
                     goalQue.push([i,j]);
                 }
+                if(grid[i][j].isActive && grid[i][j].status===goaled){
+                    goaledQue.push([i,j]);
+                    debug(grid[i][j].pathDistance);
+                }
+                if(grid[i][j].isActive && grid[i][j].status===start){
+                    grid[i][j].pathDistance=0;
+                }
             }
         }
         //goal、若しくは誕生するセルが無かったら、また、生きてるセルに変化なしなら終わり
         if(goalQue.length===0||que.length===0||activeCellNum==que.length){
-            debug("Done");
-            nowEdit = true;
-            nowPushing=none;
-            nowTime=0;
+            //displayDistance
+            {
+                let hoge=0;
+                displayDistance=0;
+                for (let i = 0; i < goaledQue.length; i++) {
+                    let ny=goaledQue[i][0],nx=goaledQue[i][1];
+                    hoge=grid[ny][nx].pathDistance;
+                    displayDistance=Math.max(displayDistance,hoge);
+                }
+            }
+            //初回経路検出
+            pathFinder();
+            pathFound=true;
             return;
         }
         //生きてるセルのカウントを保持
@@ -136,10 +159,12 @@ function algoSolver() {
                 if(grid[ny][nx].status===wall) continue;
                 if(grid[ny][nx].status===goal){
                     grid[ny][nx].status=goaled;
+                    grid[ny][nx].pathDistance=grid[p[0]][p[1]].pathDistance+1;
                     continue;
                 }
                 if(grid[ny][nx].isActive)continue;
                 grid[ny][nx].isActive=true;
+                grid[ny][nx].pathDistance=grid[p[0]][p[1]].pathDistance+1;
             }
         }
         debug("AlgoDraw");
@@ -149,5 +174,42 @@ function algoSolver() {
 }
 
 function pathFinder(){
-
+    if(goaledQue.length===0){
+        //pathFinderの最後に置き換える
+        debug("Done");
+        nowPushing=none;
+        nowTime=0;
+        nowEdit=true;
+        pathFound=false;
+        //きょりを表示
+        if(displayDistance===0){
+            debug('きょり：なし');
+            distance.innerText='きょり：なし';
+        }else{
+            debug(displayDistance);
+            distance.innerText='きょり：'+displayDistance;
+        }
+        displayDistance=0;
+        return;
+    }
+    //次のキュー
+    var tmpQue=[];
+    while (goaledQue.length!==0) {
+        let p=goaledQue[goaledQue.length-1];
+        goaledQue.pop();
+        for(let i = 0; i < 4; i++) {
+            let ny = p[0] + dy[i], nx = p[1] + dx[i];
+            if(nx < 0 || ny < 0 || nx >= lineCells || ny >= rowCells) continue;
+            if(grid[ny][nx].pathDistance===0)continue;
+            if(grid[p[0]][p[1]].pathDistance-grid[ny][nx].pathDistance===1){
+                grid[ny][nx].status=path;
+                grid[ny][nx].fillTime=0;
+                tmpQue.push([ny,nx]);
+                break;
+            }
+        }
+    }
+    goaledQue=tmpQue;
+    nowTime+=3;
+    drawGrid();
 }

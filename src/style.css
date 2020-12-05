@@ -4,7 +4,7 @@
     display: block;
     border: none;
     margin-top: 5%;
-    margin-bottom: 50%;
+    margin-bottom: 10%;
 }
 .wf-nicomoji { 
     font-family: "Nico Moji"; 
@@ -97,3 +97,65 @@ hr{
     border: 2px dashed #8c8b8b;
     background: none;
 }
+
+#popup{
+    width:30%;
+    line-height:none;
+    background:none;
+    display:none;
+    position:fixed;
+    top:50%;
+    left:50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border: none;
+    padding: none;
+    margin: none;
+  }
+  img{
+    width:100%;
+  }
+  label{
+    padding: 5px 20px;
+    background-color: black;
+    border-style: none;
+    width: 100px;
+    height: auto;
+    font-size: 18px;
+    display: inline-block;
+    padding: 0.5em 1em 0.3em;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(
+      -45deg,
+      #ddeeff 25%,
+      #c6e6fb 25%,
+      #c6e6fb 50%,
+      #ddeeff 50%,
+      #ddeeff 75%,
+      #c6e6fb 75%,
+      #c6e6fb
+    );
+    background-size: 10px 10px;
+    cursor: pointer;
+    text-align: center;
+  }
+  /*ボタンの装飾*/
+  label span{
+    font-family: "Nico Moji";
+    text-align: center;
+  }
+  label span:hover{
+    cursor:pointer;
+  }
+  input[type="checkbox"]{
+    display:none;
+  }
+  /*checkboxがcheckの状態になったらpopupを表示させる*/
+  input[type="checkbox"]:checked + #popup{
+    display:block;
+  }
+  #howto{
+    text-align: center;
+  }

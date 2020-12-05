@@ -12,9 +12,10 @@ const wall = 2;
 const start = 3;
 const goal = 4;
 const goaled=5;
+const path=6;
 
 //cellのcolor
-const cellColor = ["white","white", "slategray", "gold", "hotpink","red"];
+const cellColor = ["white","white", "slategray", "gold", "hotpink","red","aquamarine"];
 //cellのデフォルトカラーと枠線
 const cellDefaultColor="midnightblue";
 const borderDefaultColor="skyblue";
@@ -32,9 +33,10 @@ const cellSize = 10;
 var rowCells;
 var lineCells;
 
-//どのbuttonが押されているかの判断
+//どのbuttonが押されているか,現在の状態の判断
 var nowPushing = none;
 var nowEdit=true;
+var pathFound=false;
 //buttonの要素を取得
 var button = document.getElementsByName("button");
 var startButton = document.getElementById("playDisplay");
@@ -55,3 +57,5 @@ var algoSpan=5;
 var dx = [0, 1, 0, -1];
 var dy = [1, 0, -1, 0];
 var activeCellNum=0;
+var goaledQue=[];
+var displayDistance=0;

@@ -28,7 +28,7 @@ function init() {
     for (let i = 0; i < rowCells; i++) {
         grid[i] = new Array(lineCells);
         for (let j = 0; j < lineCells; j++) {
-            grid[i][j] = new Cell(way, 0, false);
+            grid[i][j] = new Cell(way, 0, false,-1);
         }
     }
 
@@ -108,7 +108,7 @@ function debug(data) {
 function gridInit() {
     for (let i = 0; i < rowCells; i++) {
         for (let j = 0; j < lineCells; j++) {
-            grid[i][j] = new Cell(way, 0, false);
+            grid[i][j] = new Cell(way, 0, false,-1);
         }
     }
 }
@@ -120,10 +120,11 @@ function gridInit() {
  * isActiveのCellのみ大きくしていく
  */
 class Cell {
-    constructor(status, fill, active) {
+    constructor(status, fill, active,path) {
         this.status = status;
         this.fillTime = fill;
         this.isActive = active;
+        this.pathDistance=path;
     }
     elapseTime() {
         if (this.fillTime < fillTime) {
