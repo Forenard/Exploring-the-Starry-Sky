@@ -14,9 +14,9 @@ const goal = 4;
 const goaled=5;
 
 //cellのcolor
-const cellColor = ["white","deepskyblue", "slategray", "gold", "hotpink","red"];
+const cellColor = ["white","white", "slategray", "gold", "hotpink","red"];
 //cellのデフォルトカラーと枠線
-const cellDefaultColor="white";
+const cellDefaultColor="midnightblue";
 const borderDefaultColor="skyblue";
 //cellの倍率
 const cellSizePersent=0.95;
@@ -38,7 +38,7 @@ var nowEdit=true;
 //buttonの要素を取得
 var button = document.getElementsByName("button");
 var startButton = document.getElementById("playDisplay");
-
+var distance=document.getElementById("distance");
 //現在のマウスがcanvas中かどうか
 var isMouseIn = false;
 //現在はクリック中か(canvas中)
@@ -54,3 +54,4 @@ var algoSpan=5;
 //algoSolver用
 var dx = [0, 1, 0, -1];
 var dy = [1, 0, -1, 0];
+var activeCellNum=0;

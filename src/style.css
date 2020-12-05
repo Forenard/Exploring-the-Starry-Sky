@@ -3,14 +3,23 @@
     margin: auto;
     display: block;
     border: none;
+    margin-top: 5%;
+    margin-bottom: 50%;
+}
+.wf-nicomoji { 
+    font-family: "Nico Moji"; 
+    text-align: center;
+    color: silver;
+    font-size: 250%;
+    text-decoration: none;
 }
 
-h1 {
-    text-align: center;
-}
 
 button {
     cursor: pointer;
+    font-family: "Nico Moji";
+    font-size: 20px;
+    font-weight: bold;
 }
 
 #buttons {
@@ -21,8 +30,26 @@ button {
     padding: 5px 20px;
     background-color: #337ab7;
     border-style: none;
-    width: 100px;
+    width: 120px;
     height: auto;
+    font-size: 18px;
+    display: inline-block;
+    padding: 0.5em 1em 0.3em;
+    color: #0099ff;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(
+      -45deg,
+      #ddeeff 25%,
+      #c6e6fb 25%,
+      #c6e6fb 50%,
+      #ddeeff 50%,
+      #ddeeff 75%,
+      #c6e6fb 75%,
+      #c6e6fb
+    );
+    background-size: 10px 10px;
+    cursor: pointer;
 }
 
 .clear {
@@ -31,12 +58,29 @@ button {
     border-style: none;
     width: 100px;
     height: auto;
+    font-size: 18px;
+    display: inline-block;
+    padding: 0.5em 1em 0.3em;
+    color: tomato;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(
+      -45deg,
+      #ddeeff 25%,
+      #c6e6fb 25%,
+      #c6e6fb 50%,
+      #ddeeff 50%,
+      #ddeeff 75%,
+      #c6e6fb 75%,
+      #c6e6fb
+    );
+    background-size: 10px 10px;
+    cursor: pointer;
 }
 
 #player {
     text-align: center;
-    padding-bottom: 20px;
-    padding-top: 20px;
+    padding-bottom: 60px;
 }
 
 #playDisplay {
@@ -44,4 +88,12 @@ button {
     cursor: pointer;
     /* カーソル形状 */
     width: 100px;
+    
+    filter: invert(88%) sepia(61%) saturate(0%) hue-rotate(229deg) brightness(107%) contrast(101%);
+}
+
+hr{
+    color: #fff;
+    border: 2px dashed #8c8b8b;
+    background: none;
 }

@@ -1,3 +1,20 @@
+//ソルバを分ける
+function solver() {
+    if(nowEdit){
+        //画像差し替え
+        startButton.setAttribute('src', '../images/play.png');
+        editSolver();
+    }else{
+        //画像差し替え
+        startButton.setAttribute('src', '../images/stop.png');
+        algoSolver();
+    }
+}
+
+setInterval(solver, 15);
+
+
+
 /**
  * grid配列を編集
  * @param {int(Cellの状態)} status 
@@ -69,7 +86,7 @@ function drawGrid() {
 }
 
 //編集用
-function EditSolver() {
+function editSolver() {
     //canvasの初期化
     ctx.clearRect(0, 0, width, height);
     
@@ -82,7 +99,7 @@ function EditSolver() {
 }
 
 //アルゴ用
-function AlgoSolver() {
+function algoSolver() {
     //ゆっくり進める
     if(nowTime%algoSpan===0){
         //生きてるセルの検出
@@ -99,16 +116,17 @@ function AlgoSolver() {
                 }
             }
         }
-        //goal、若しくは誕生するセルが無かったら終わり
-        if(goalQue.length===0||que.length===0){
+        //goal、若しくは誕生するセルが無かったら、また、生きてるセルに変化なしなら終わり
+        if(goalQue.length===0||que.length===0||activeCellNum==que.length){
             debug("Done");
             nowEdit = true;
             nowPushing=none;
             nowTime=0;
-            //Todo:startButtonの画像の切り替え
-
             return;
         }
+        //生きてるセルのカウントを保持
+        activeCellNum=que.length;
+
         while (que.length!==0) {
             let p=que[que.length-1];
             que.pop();
@@ -130,17 +148,6 @@ function AlgoSolver() {
     nowTime++;
 }
 
-//ソルバを分ける
-function Solver() {
-    if(nowEdit){
-        //画像差し替え
-        startButton.setAttribute('src', '../images/play.png');
-        EditSolver();
-    }else{
-        //画像差し替え
-        startButton.setAttribute('src', '../images/stop.png');
-        AlgoSolver();
-    }
-}
+function pathFinder(){
 
-setInterval(Solver, 15);
+}

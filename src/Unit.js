@@ -1,34 +1,3 @@
-//マウス系の関数を登録
-function onDown(e) {
-
-    isClickDown = true;
-}
-
-function onUp(e) {
-
-    isClickDown = false;
-}
-
-function onClick(e) {
-
-}
-
-function onOver(e) {
-
-    isMouseIn = true;
-}
-
-function onOut() {
-
-    isMouseIn = false;
-    isClickDown = false;
-}
-//動いてるときに検出
-function getMousePoint(e) {
-    mouseX = e.clientX - canvas.getBoundingClientRect().left;
-    mouseY = e.clientY - canvas.getBoundingClientRect().top;
-}
-
 //Onloadで初めに呼ばれる。
 function init() {
     //キャンバスの定義
@@ -67,6 +36,8 @@ function init() {
     button[0].onclick = () => {
         debug("none");
         nowPushing = none;
+        //gridの初期化
+        gridInit();
     }
     for (let i = 1; i < button.length; i++) {
         button[i].onclick = () => {
@@ -86,6 +57,42 @@ function init() {
 
 
 
+
+//マウス系の関数を登録
+function onDown(e) {
+
+    isClickDown = true;
+}
+
+function onUp(e) {
+
+    isClickDown = false;
+}
+
+function onClick(e) {
+
+}
+
+function onOver(e) {
+
+    isMouseIn = true;
+}
+
+function onOut() {
+
+    isMouseIn = false;
+    isClickDown = false;
+}
+//動いてるときに検出
+function getMousePoint(e) {
+    mouseX = e.clientX - canvas.getBoundingClientRect().left;
+    mouseY = e.clientY - canvas.getBoundingClientRect().top;
+}
+
+
+
+
+
 //便利なfunctionたち
 
 /**
@@ -95,7 +102,16 @@ function init() {
 function debug(data) {
     console.log(data);
 }
-
+/**
+ * girdの初期化
+ */
+function gridInit() {
+    for (let i = 0; i < rowCells; i++) {
+        for (let j = 0; j < lineCells; j++) {
+            grid[i][j] = new Cell(way, 0, false);
+        }
+    }
+}
 
 //classたち
 /**
