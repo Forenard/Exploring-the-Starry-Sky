@@ -1,13 +1,9 @@
-# GameForBrowser
- ゲームをJS,HTMLで作る
-## 構想
-- 最短経路を求め、視覚的にわかりやすく表示する？
-- MazeSolver!!!Let'sGOOOOOOO!!!
+# Exploring-the-Starry-Sky
 
-# 実装
-- えー、クリックダウン時にぬりぬりできるようにする
-- 全てにおいてそうする？->とりあえず全部のstatusでやる
-- way以外は最初からfilled
-- done!
-## ぺれれ～
-- [Webページ](https://forenard.github.io/GameForBrowser/)
+![image](https://user-images.githubusercontent.com/64544361/118382957-e5822b80-b634-11eb-9672-81d3b37bc1fa.png)
+
+
+js,html,cssのみで作成したゲーム
+
+障害物がある中でスタートからゴールまでの最短経路を求め、視覚的にわかりやすく表示することが出来る\
+Webページは[こちら](https://forenard.github.io/GameForBrowser/)
